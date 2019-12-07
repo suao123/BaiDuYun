@@ -4,16 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.baiduyun.constant.Constant;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,19 +42,46 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OkHttpClient okHttpClient = new OkHttpClient();
-                Request request = new Request.Builder()
-                                            .get()
-                                            .url(Constant.URL + "api_login?" + "id=" + txt_id.getText() + "password=" + txt_password.getText())
-                                            .build();
-                try {
-                    Response response = okHttpClient.newCall(request).execute();
-                    if(response.isSuccessful()){
 
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        StringBuffer str_content = new StringBuffer();
+                        String login_web = Constant.URL + "api_login?username=" + txt_id.getText() + "&password=" + txt_password.getText();
+                        try {
+                            URL url = new URL(login_web);
+                            HttpURLConnection connect = (HttpURLConnection) url.openConnection();
+                            connect.setRequestMethod("GET");
+                            connect.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                            connect.setReadTimeout(8000);
+                            connect.setReadTimeout(8000);
+
+                            int code = connect.getResponseCode();
+                            if (code == 200){
+                                //将响应流转换成字符串
+                                BufferedReader reader = new BufferedReader(new InputStreamReader(connect.getInputStream()));
+                                String line = "";
+                                while ((line = reader.readLine())!=null){
+                                    str_content.append(line);
+                                }
+                                JSONObject content = new JSONObject(String.valueOf(str_content));
+
+                                if(content.getString("status").equals("failed")){
+                                    Looper.prepare();
+                                    Toast.makeText(getApplicationContext(), "您输入的账号或者密码有误", Toast.LENGTH_LONG).show();
+                                    Looper.loop();
+                                } else if(content.get("status").equals("success")){
+                                    Looper.prepare();
+                                    Toast.makeText(getApplicationContext(), "成功登陆", Toast.LENGTH_LONG).show();
+                                    Looper.loop();
+                                }
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                }).start();
             }
         });
 
@@ -58,4 +93,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
