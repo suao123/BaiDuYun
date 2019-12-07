@@ -8,11 +8,14 @@
 
     <EditText
         android:id="@+id/signUp_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="请输入手机号"
+        android:layout_width="match_parent"
+        android:hint=" 请输入手机号"
         android:layout_marginTop="200dp"
-
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:background="@drawable/edit_shape"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -21,22 +24,46 @@
 
     <EditText
         android:id="@+id/signUp_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="请输入密码"
+        android:layout_width="match_parent"
+        android:hint=" 请输入密码"
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:background="@drawable/edit_shape"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         app:layout_constraintTop_toBottomOf="@+id/signUp_id"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
 
+    <EditText
+        android:id="@+id/signUp_conf_password"
+        android:layout_width="match_parent"
+        android:hint=" 请输入密码"
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:background="@drawable/edit_shape"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/signUp_password"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
     <Button
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:background="@drawable/edit_shape"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:id="@+id/button_signUp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
         android:layout_marginTop="20dp"
         android:text="注册"
-        app:layout_constraintTop_toBottomOf="@+id/signUp_password"
+        app:layout_constraintTop_toBottomOf="@+id/signUp_conf_password"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:ignore="MissingConstraints" />
