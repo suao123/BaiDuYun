@@ -22,7 +22,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
-
     <EditText
         android:id="@+id/login_password"
         android:layout_width="match_parent"
