@@ -11,16 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.baiduyun.constant.Constant;
+import com.example.baiduyun.utils.FileIO;
+import com.example.baiduyun.utils.HttpURL;
+import com.example.baiduyun.utils.Toasttip;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.HashMap;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -46,36 +44,26 @@ public class MainActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        StringBuffer str_content = new StringBuffer();
-                        String login_web = Constant.URL + "api_login?username=" + txt_id.getText() + "&password=" + txt_password.getText();
+                        JSONObject result = null;
+                        HttpURL httpURL = new HttpURL();
+                        Toasttip tip = new Toasttip(getApplicationContext());
+                        FileIO fileIO = new FileIO(getApplicationContext());
+                        HashMap<String, String> requestResource = new HashMap<>();
+                        requestResource.put("username", txt_id.getText().toString());
+                        requestResource.put("password", txt_password.getText().toString());
                         try {
-                            URL url = new URL(login_web);
-                            HttpURLConnection connect = (HttpURLConnection) url.openConnection();
-                            connect.setRequestMethod("GET");
-                            connect.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                            connect.setReadTimeout(8000);
-                            connect.setReadTimeout(8000);
+                            result = httpURL.getURLResource("api_login", "GET", requestResource);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
-                            int code = connect.getResponseCode();
-                            if (code == 200){
-                                //将响应流转换成字符串
-                                BufferedReader reader = new BufferedReader(new InputStreamReader(connect.getInputStream()));
-                                String line = "";
-                                while ((line = reader.readLine())!=null){
-                                    str_content.append(line);
-                                }
-                                JSONObject content = new JSONObject(String.valueOf(str_content));
-
-                                if(content.getString("status").equals("failed")){
-                                    Looper.prepare();
-                                    Toast.makeText(getApplicationContext(), "您输入的账号或者密码有误", Toast.LENGTH_LONG).show();
-                                    Looper.loop();
-                                } else if(content.get("status").equals("success")){
-                                    Looper.prepare();
-                                    Toast.makeText(getApplicationContext(), "成功登陆", Toast.LENGTH_LONG).show();
-                                    Looper.loop();
-                                }
-
+                        try {
+                            assert result != null;
+                            if(result.get("status").equals("success")){
+                                tip.showTip("登陆成功");
+                                fileIO.saveCookie(result.get("token").toString());
+                            } else {
+                                tip.showTip("您的账号或密码有误");
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
