@@ -59,8 +59,9 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             assert result != null;
                             if(result.get("status").equals("success")){
-                                tip.showTip("登陆成功");
+                                //tip.showTip("登陆成功");
                                 fileIO.saveCookie(result.get("token").toString());
+
                                 if (Looper.myLooper() != Looper.getMainLooper()) {
                                     Handler mainThread = new Handler(Looper.getMainLooper());
                                     mainThread.post(new Runnable() {
@@ -72,6 +73,15 @@ public class MainActivity extends AppCompatActivity {
                                     });
                                     return;
                                 }
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "登陆成功", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                    }
+                                });
+
                             } else {
                                 tip.showTip("您的账号或密码有误");
                             }
