@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Response response = okHttpClient.newCall(request).execute();
                     if(response.isSuccessful()){
-
+                        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                        startActivity(intent);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
