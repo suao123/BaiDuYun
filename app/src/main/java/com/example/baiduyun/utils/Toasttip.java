@@ -21,4 +21,5 @@ public class Toasttip {
         Toast.makeText(mContext, content, Toast.LENGTH_SHORT).show();
         Looper.loop();
     }
+
 }
