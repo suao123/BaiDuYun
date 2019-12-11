@@ -1,7 +1,10 @@
 package com.example.baiduyun;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,7 +25,11 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add,menu);
+        return true;
+    }
 
     @SuppressLint("WrongConstant")
     @Override
@@ -44,6 +51,20 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
 
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.add_file:
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");//设置类型，我这里是任意类型，任意后缀的可以这样写。
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(intent,1);
+                default:
+                    break;
+        }
+        return true;
     }
 
 
