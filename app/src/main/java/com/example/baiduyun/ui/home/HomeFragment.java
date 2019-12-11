@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,14 +39,14 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         CloudAdapter adapter = new CloudAdapter(cloudList);
         recyclerView.setAdapter(adapter);
-
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         return root;
     }
 
 
     private void initCloud(){
         for(int i=0;i<=20;i++){
-            Cloud cloud = new Cloud("wo shi yi duo ke ai de yun",R.drawable.ic_logo);
+            Cloud cloud = new Cloud("wo shi yi duo ke ai de yun",R.drawable.file_logo);
             cloudList.add(cloud);
         }
     }

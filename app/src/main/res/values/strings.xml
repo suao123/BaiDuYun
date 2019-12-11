@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">BaiDuYun</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_yun">yun</string>
+    <string name="title_home">文件</string>
+    <string name="title_dashboard">传输列表</string>
+    <string name="title_notifications">我的</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.baiduyun;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -33,6 +34,12 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.hide();
+        }
+
         txt_phone = findViewById(R.id.signUp_id);
         txt_password = findViewById(R.id.signUp_password);
         txt_conf_password = findViewById(R.id.signUp_conf_password);
