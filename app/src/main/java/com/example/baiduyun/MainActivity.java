@@ -2,6 +2,8 @@ package com.example.baiduyun;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,17 +58,30 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             assert result != null;
                             if(result.get("status").equals("success")){
+                                //tip.showTip("登陆成功");
                                 fileIO.saveCookie(result.get("token").toString());
+
+                                if (Looper.myLooper() != Looper.getMainLooper()) {
+                                    Handler mainThread = new Handler(Looper.getMainLooper());
+                                    mainThread.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                    return;
+                                }
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         Toast.makeText(getApplicationContext(), "登陆成功", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                                        intent.putExtra("username", txt_id.getText().toString());
                                         startActivity(intent);
                                         finish();
                                     }
                                 });
+
                             } else {
                                 tip.showTip("您的账号或密码有误");
                             }
@@ -86,7 +101,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 }
