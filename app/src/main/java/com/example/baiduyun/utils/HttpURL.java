@@ -33,7 +33,6 @@ public class HttpURL {
             web_URL.append(s).append("=").append(requestResource.get(s)).append("&");
         }
         web_URL.deleteCharAt(web_URL.length() - 1);
-
         url = new URL(web_URL.toString());
         connect = (HttpURLConnection) url.openConnection();
         connect.setRequestMethod(requestMode);
@@ -50,7 +49,6 @@ public class HttpURL {
                 str_content.append(line);
             }
         }
-
         content = new JSONObject(String.valueOf(str_content));
         return content;
     }
