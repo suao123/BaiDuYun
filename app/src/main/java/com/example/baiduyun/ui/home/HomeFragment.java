@@ -2,9 +2,12 @@ package com.example.baiduyun.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -45,11 +48,16 @@ public class HomeFragment extends Fragment {
 
 
     private void initCloud(){
-        for(int i=0;i<=20;i++){
-            Cloud cloud = new Cloud("wo shi yi duo ke ai de yun",R.drawable.file_logo);
+        for(int i=0;i<=5;i++){
+            Cloud cloud = new Cloud("wo shi yi duo ",R.drawable.file_logo,"2019/12/25");
+            cloudList.add(cloud);
+        }
+        for(int i=0;i<=5;i++){
+            Cloud cloud = new Cloud("wo shi yi duo ke ai de yun",R.drawable.file_logo,"2019/12/25");
             cloudList.add(cloud);
         }
     }
+
 
 
 }

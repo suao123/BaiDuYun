@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baiduyun.Cloud;
 import com.example.baiduyun.CloudAdapter;
+import com.example.baiduyun.DownLoad;
+import com.example.baiduyun.DownLoadAdapter;
 import com.example.baiduyun.R;
 
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ import java.util.List;
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
-    private List<Cloud> cloudList = new ArrayList<>();
+    private List<DownLoad> cloudList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class DashboardFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView)root.findViewById(R.id.recycle_view_2);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        CloudAdapter adapter = new CloudAdapter(cloudList);
+        DownLoadAdapter adapter = new DownLoadAdapter(cloudList);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
@@ -46,7 +48,7 @@ public class DashboardFragment extends Fragment {
 
     private void initCloud(){
         for(int i=0;i<=20;i++){
-            Cloud cloud = new Cloud("wo shi ni baba",R.drawable.file_logo);
+            DownLoad cloud = new DownLoad("wo shi ni baba",R.drawable.file_logo,"2019",99);
             cloudList.add(cloud);
         }
     }

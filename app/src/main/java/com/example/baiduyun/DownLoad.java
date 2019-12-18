@@ -1,12 +1,19 @@
 package com.example.baiduyun;
 
-public class Cloud {
+public class DownLoad {
 
     private  String name ;
     private  int imageId;
+    private  int jinDu;
     private  String time ;
 
-    public  Cloud(String name,int imageId ,String  time){
+    public  DownLoad(String name,int imageId ,String  time,int num){
+        this.name = name ;
+        this.imageId = imageId ;
+        this.time =  time;
+        this.jinDu = num ;
+    }
+    public  DownLoad(String name,int imageId ,String  time){
         this.name = name ;
         this.imageId = imageId ;
         this.time =  time;
@@ -19,5 +26,9 @@ public class Cloud {
     }
     public int getImageId(){
         return imageId;
+    }
+
+    public int getjinDu(){
+        return jinDu;
     }
 }

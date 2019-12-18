@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class CloudAdapter extends RecyclerView.Adapter<CloudAdapter.ViewHolder>{
+public class DownLoadAdapter extends RecyclerView.Adapter<DownLoadAdapter.ViewHolder>{
 
-    private List<Cloud> myCloudList;
+    private List<DownLoad> myCloudList;
 
     //定义一个内部类ViewHolder，继承自RecyclerView.ViewHolder，用来缓存子项的各个实例，提高效率
     static class ViewHolder extends RecyclerView.ViewHolder{
@@ -25,18 +25,19 @@ public class CloudAdapter extends RecyclerView.Adapter<CloudAdapter.ViewHolder>{
         ImageView cloudImage;
         TextView cloudName;
         TextView cloudTime;
-
+        TextView cloudNum;
         public ViewHolder(View view){
             super(view);
             cloudView = (Button)view.findViewById(R.id.btn_eidt);
             cloudImage = (ImageView)view.findViewById(R.id.file_icon);
             cloudName=(TextView)view.findViewById(R.id.file_name);
             cloudTime=(TextView)view.findViewById(R.id.file_time);
+            cloudNum=(TextView)view.findViewById(R.id.file_num);
         }
     }
 
     //绑定传入的数据源
-    public CloudAdapter(List<Cloud> fruitList){
+    public DownLoadAdapter(List<DownLoad> fruitList){
         myCloudList = fruitList;
     }
 
@@ -49,7 +50,7 @@ public class CloudAdapter extends RecyclerView.Adapter<CloudAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Cloud cloud = myCloudList.get(position);
+                DownLoad cloud = myCloudList.get(position);
 //                Toast.makeText(v.getContext(),"ojbk",Toast.LENGTH_SHORT).show();
                 showPopupMenu(holder,holder.cloudView);
             }
@@ -61,22 +62,21 @@ public class CloudAdapter extends RecyclerView.Adapter<CloudAdapter.ViewHolder>{
         // View当前PopupMenu显示的相对View的位置
         PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
         // menu布局
-        popupMenu.getMenuInflater().inflate(R.menu.menu_d, popupMenu.getMenu());
+        popupMenu.getMenuInflater().inflate(R.menu.stop, popupMenu.getMenu());
         // menu的item点击事件
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Toast.makeText(view.getContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-                   if(item.getItemId()==R.id.remove) {
-                       int position = holder.getAdapterPosition();
-                       removeData(position);
-                   }
+                if(item.getItemId()==R.id.remove2) {
+                    int position = holder.getAdapterPosition();
+                    removeData(position);
+                }
                 return false;
             }
         });
         popupMenu.show();
     }
-
 
     //  删除数据
     public void removeData(int position) {
@@ -88,7 +88,7 @@ public class CloudAdapter extends RecyclerView.Adapter<CloudAdapter.ViewHolder>{
     //实现onBindViewHolder方法，设置子Item上各个实例
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Cloud cloud = myCloudList.get(position);
+        DownLoad cloud = myCloudList.get(position);
         holder.cloudImage.setImageResource(cloud.getImageId());
         holder.cloudName.setText(cloud.getName());
         holder.cloudTime.setText(cloud.getTime());
@@ -99,6 +99,4 @@ public class CloudAdapter extends RecyclerView.Adapter<CloudAdapter.ViewHolder>{
     public int getItemCount() {
         return myCloudList.size();
     }
-
-
 }

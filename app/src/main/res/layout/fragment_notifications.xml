@@ -30,7 +30,23 @@
         app:layout_constraintTop_toBottomOf="@+id/image_touxiang"
         />
 
-     <EditText
+    <EditText
+        android:id="@+id/change_nickname"
+        android:hint=" 修改昵称"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_shape"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_changeHead"
+        />
+
+
+    <EditText
          android:id="@+id/change_psd"
          android:hint=" 修改密码"
          android:layout_width="match_parent"
@@ -42,23 +58,23 @@
          android:layout_marginRight="40dp"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@id/btn_changeHead"
+         app:layout_constraintTop_toBottomOf="@id/change_nickname"
          />
 
     <EditText
-        android:id="@+id/change_psd2"
-        android:hint=" 确认密码"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edit_shape"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/change_psd"
-        />
+    android:id="@+id/change_psd2"
+    android:hint=" 确认密码"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:textSize="20dp"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/edit_shape"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/change_psd"
+    />
 
     <Button
         android:id="@+id/btn_change_psd"
