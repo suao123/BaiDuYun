@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,12 +24,14 @@ public class CloudAdapter extends RecyclerView.Adapter<CloudAdapter.ViewHolder>{
         View cloudView;
         ImageView cloudImage;
         TextView cloudName;
+        TextView cloudSize;
 
         public ViewHolder(View view){
             super(view);
             cloudView = (Button)view.findViewById(R.id.btn_eidt);
             cloudImage = (ImageView)view.findViewById(R.id.file_icon);
             cloudName=(TextView)view.findViewById(R.id.file_name);
+            cloudSize = (TextView)view.findViewById(R.id.file_num);
         }
     }
 
@@ -88,6 +91,7 @@ public class CloudAdapter extends RecyclerView.Adapter<CloudAdapter.ViewHolder>{
         Cloud cloud = myCloudList.get(position);
         holder.cloudImage.setImageResource(cloud.getImageId());
         holder.cloudName.setText(cloud.getName());
+        holder.cloudSize.setText(cloud.getSize());
     }
 
     //返回子项个数

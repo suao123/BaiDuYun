@@ -1,18 +1,12 @@
 package com.example.baiduyun;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.baiduyun.utils.HttpURL;
 import com.example.baiduyun.utils.Toasttip;
@@ -67,17 +61,13 @@ public class SignUp extends AppCompatActivity {
                             try {
                                 result = httpURL.getURLResource("api_reg", "GET", requestResource, null);
                                 if(result.get("status").equals("success")){
-                                    if (Looper.myLooper() != Looper.getMainLooper()) {
-                                        Handler mainThread = new Handler(Looper.getMainLooper());
-                                        mainThread.post(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
-                                                finish();
-                                            }
-                                        });
-                                        return;
-                                    }
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    });
                                 } else if(result.get("status").equals("exists")){
                                     tip.showTip("您的账号已被注册");
                                 } else if(result.get("status").equals("failed")){

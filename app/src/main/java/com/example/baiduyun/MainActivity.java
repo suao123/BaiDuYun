@@ -2,8 +2,6 @@ package com.example.baiduyun;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,18 +59,6 @@ public class MainActivity extends AppCompatActivity {
                                 //tip.showTip("登陆成功");
                                 fileIO.saveCookie(result.get("token").toString());
                                 fileIO.saveUsername(txt_id.getText().toString());
-
-                                if (Looper.myLooper() != Looper.getMainLooper()) {
-                                    Handler mainThread = new Handler(Looper.getMainLooper());
-                                    mainThread.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-                                            startActivity(intent);
-                                        }
-                                    });
-                                    return;
-                                }
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -82,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
                                         finish();
                                     }
                                 });
-
                             } else {
                                 tip.showTip("您的账号或密码有误");
                             }
