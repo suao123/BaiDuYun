@@ -65,7 +65,7 @@ public class SignUp extends AppCompatActivity {
                             requestResource.put("username", txt_phone.getText().toString());
                             requestResource.put("password", txt_password.getText().toString());
                             try {
-                                result = httpURL.getURLResource("api_reg", "GET", requestResource);
+                                result = httpURL.getURLResource("api_reg", "GET", requestResource, null);
                                 if(result.get("status").equals("success")){
                                     if (Looper.myLooper() != Looper.getMainLooper()) {
                                         Handler mainThread = new Handler(Looper.getMainLooper());

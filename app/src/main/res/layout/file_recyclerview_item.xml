@@ -1,25 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="70dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/file_icon"
         android:layout_width="30dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_gravity="center_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/file_name"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_gravity="center_vertical"
-        android:text="TextView"
+        android:singleLine="true"
+        android:text="zzzzzz.zip"
+        android:textSize="13dp"
         app:layout_constraintStart_toEndOf="@+id/file_icon"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/file_num"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:textSize="16dp"
+            android:textColor="#A7AAA7"
+            android:text="300MB"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_eidt"
+        android:layout_height="40dp"
+        android:layout_width="75dp"
+        android:layout_marginLeft="10dp"
+        android:text="编辑"
+        android:layout_gravity="center_vertical"
+        />
+
 </LinearLayout>

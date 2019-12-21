@@ -43,8 +43,6 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-
-
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
@@ -59,6 +57,4 @@ public class HomeActivity extends AppCompatActivity {
         }
         return true;
     }
-
-
 }

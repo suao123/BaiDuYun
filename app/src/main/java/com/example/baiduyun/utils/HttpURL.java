@@ -17,11 +17,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.ws.rs.DefaultValue;
+
 public class HttpURL {
 
     private static final String URL = "http://file.womoe.top/api/";
 
-    public JSONObject getURLResource(String apiType, String requestMode,HashMap<String, String> requestResource) throws Exception {
+    public JSONObject getURLResource(String apiType, String requestMode, HashMap<String, String> requestResource, HashMap<String, String> cookie) throws Exception {
         int code = 0;
         java.net.URL url;
         JSONObject content;
@@ -38,6 +40,9 @@ public class HttpURL {
         connect.setRequestMethod(requestMode);
         connect.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         connect.setReadTimeout(8000);
+        if(cookie != null){
+            connect.setRequestProperty("cookie", "token=" + cookie.get("token"));
+        }
 
         code = connect.getResponseCode();
         System.out.println(code);
@@ -52,4 +57,5 @@ public class HttpURL {
         content = new JSONObject(String.valueOf(str_content));
         return content;
     }
+
 }
