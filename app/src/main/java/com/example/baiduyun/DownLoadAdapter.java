@@ -24,14 +24,12 @@ public class DownLoadAdapter extends RecyclerView.Adapter<DownLoadAdapter.ViewHo
         View cloudView;
         ImageView cloudImage;
         TextView cloudName;
-        TextView cloudTime;
         TextView cloudNum;
         public ViewHolder(View view){
             super(view);
             cloudView = (Button)view.findViewById(R.id.btn_eidt);
             cloudImage = (ImageView)view.findViewById(R.id.file_icon);
             cloudName=(TextView)view.findViewById(R.id.file_name);
-            cloudTime=(TextView)view.findViewById(R.id.file_time);
             cloudNum=(TextView)view.findViewById(R.id.file_num);
         }
     }
@@ -91,7 +89,6 @@ public class DownLoadAdapter extends RecyclerView.Adapter<DownLoadAdapter.ViewHo
         DownLoad cloud = myCloudList.get(position);
         holder.cloudImage.setImageResource(cloud.getImageId());
         holder.cloudName.setText(cloud.getName());
-        holder.cloudTime.setText(cloud.getTime());
     }
 
     //返回子项个数

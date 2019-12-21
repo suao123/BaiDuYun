@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         requestResource.put("username", txt_id.getText().toString());
                         requestResource.put("password", txt_password.getText().toString());
                         try {
-                            result = httpURL.getURLResource("api_login", "GET", requestResource);
+                            result = httpURL.getURLResource("api_login", "GET", requestResource, null);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                             if(result.get("status").equals("success")){
                                 //tip.showTip("登陆成功");
                                 fileIO.saveCookie(result.get("token").toString());
+                                fileIO.saveUsername(txt_id.getText().toString());
 
                                 if (Looper.myLooper() != Looper.getMainLooper()) {
                                     Handler mainThread = new Handler(Looper.getMainLooper());

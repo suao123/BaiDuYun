@@ -20,8 +20,14 @@ import com.example.baiduyun.CloudAdapter;
 import com.example.baiduyun.DownLoad;
 import com.example.baiduyun.DownLoadAdapter;
 import com.example.baiduyun.R;
+import com.example.baiduyun.utils.FileIO;
+import com.example.baiduyun.utils.HttpURL;
+import com.google.gson.stream.JsonWriter;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DashboardFragment extends Fragment {
@@ -35,7 +41,11 @@ public class DashboardFragment extends Fragment {
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        initCloud();
+        try {
+            initCloud();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         RecyclerView recyclerView = (RecyclerView)root.findViewById(R.id.recycle_view_2);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -47,9 +57,25 @@ public class DashboardFragment extends Fragment {
     }
 
     private void initCloud(){
-        for(int i=0;i<=20;i++){
-            DownLoad cloud = new DownLoad("wo shi ni baba",R.drawable.file_logo,"2019",99);
-            cloudList.add(cloud);
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                JSONObject result = null;
+                HashMap<String, String> requestResource = new HashMap<>();
+                HashMap<String, String> cookie = new HashMap<>();
+                HttpURL url = new HttpURL();
+                FileIO file=  new FileIO(getContext());
+                try {
+                    cookie.put("token", file.readCookie());
+                    requestResource.put("username", file.readUsername());
+                    result = url.getURLResource("files", "GET", requestResource, cookie);
+                    System.out.println(result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+
     }
 }

@@ -24,14 +24,12 @@ public class CloudAdapter extends RecyclerView.Adapter<CloudAdapter.ViewHolder>{
         View cloudView;
         ImageView cloudImage;
         TextView cloudName;
-        TextView cloudTime;
 
         public ViewHolder(View view){
             super(view);
             cloudView = (Button)view.findViewById(R.id.btn_eidt);
             cloudImage = (ImageView)view.findViewById(R.id.file_icon);
             cloudName=(TextView)view.findViewById(R.id.file_name);
-            cloudTime=(TextView)view.findViewById(R.id.file_time);
         }
     }
 
@@ -91,7 +89,6 @@ public class CloudAdapter extends RecyclerView.Adapter<CloudAdapter.ViewHolder>{
         Cloud cloud = myCloudList.get(position);
         holder.cloudImage.setImageResource(cloud.getImageId());
         holder.cloudName.setText(cloud.getName());
-        holder.cloudTime.setText(cloud.getTime());
     }
 
     //返回子项个数

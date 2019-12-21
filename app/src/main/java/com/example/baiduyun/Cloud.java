@@ -14,9 +14,7 @@ public class Cloud {
     public String getName(){
         return name;
     }
-    public String getTime(){
-        return time;
-    }
+
     public int getImageId(){
         return imageId;
     }
