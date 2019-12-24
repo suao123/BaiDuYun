@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Base64;
 import java.util.HashMap;
 
@@ -17,14 +18,18 @@ public class FileIO {
     private static final String fileCookie = "cookie.txt";
     private static final String fileUsername = "username.txt";
     @SuppressLint("SdCardPath")
-    private static final String userFile = "/mnt/sdcard/";
+    private static final String userFile = "/mnt/sdcard/BAIDUYUN";
     private Context mContext;
 
-    public FileIO(){}
+    public FileIO(Runnable runnable){}
 
     public FileIO(Context mContext){
         super();
         this.mContext = mContext;
+        File file = new File(userFile);
+        if (!file.exists()){
+            file.mkdir();
+        }
     }
 
 
@@ -72,8 +77,21 @@ public class FileIO {
         byte[] data = new byte[fileInputStream.available()];
         fileInputStream.read(data);
         String content = Base64.getEncoder().encodeToString(data);
-        result.put("fileCookie", file.getName());
+        result.put("extend",file.getName().substring(file.getName().indexOf(".")));
+        result.put("filename", file.getName());
         result.put("base64File", content);
         return result;
+    }
+
+    public void downloadFile(InputStream input, String filename) throws Exception {
+        System.out.println(input);
+        File file = new File(userFile, filename);
+        file.createNewFile();
+
+        FileOutputStream outputStream = new FileOutputStream(file);
+        byte[] buf = new byte[512];
+        int len = 0;
+        while((len = input.read(buf)) != -1)
+            outputStream.write(buf, 0, len);
     }
 }

@@ -27,14 +27,16 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
-    private static List<Cloud> cloudList = new ArrayList<>();
+    private  List<Cloud> cloudList = new ArrayList<>();
+    private boolean flag = false;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
+        flag = false;
         initCloud();
+        while(!flag){System.out.println("");}
         RecyclerView recyclerView = (RecyclerView)root.findViewById(R.id.recycle_view_1);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -64,18 +66,21 @@ public class HomeFragment extends Fragment {
 
                         for(int i = 0; i < files.length(); i++){
                             JSONObject json = (JSONObject) files.get(i);
-                            if((Integer)json.get("size") < 1024){
-                                cloudList.add(new Cloud(json.getString("name"), R.drawable.file_logo, json.getString("size") + "KB"));
-                            } else {
+                            if((Integer)json.get("size") < 1024 * 1024){
                                 int tmp = (Integer) json.get("size") / 1024;
+                                cloudList.add(new Cloud(json.getString("name"), R.drawable.file_logo, tmp + "KB"));
+                            } else {
+                                int tmp = (Integer) json.get("size") / (1024*1024);
                                 cloudList.add(new Cloud(json.getString("name"), R.drawable.file_logo, tmp + "MB"));
                             }
                         }
+                        System.out.println(cloudList);
+                        System.out.println("");
+                        flag = true;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
         }).start();
     }
